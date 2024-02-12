@@ -20,8 +20,12 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
+      - name: Make Maven Wrapper Executable
+        run: chmod +x mvnw
+
       - name: Build and Package
         run: ./mvnw package
+
 
       - name: Copy JAR to Server
         uses: appleboy/scp-action@master
