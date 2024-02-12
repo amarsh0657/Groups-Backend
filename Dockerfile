@@ -1,41 +1,22 @@
-steps:
-  # Build the Spring Boot app
-  - name: 'maven:3.8.4-openjdk-17'
-    entrypoint: 'mvn'
-    args: ['clean', 'install']
+FROM openjdk:17-jdk-alpine
 
+# Set the working directory in the container
+WORKDIR /app
 
-  # Step 2: Build the Docker container
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/raghuvanshi-api', '.']
+# Copy the source code into the container
+COPY . .
 
-#  # Step 3: Copy the MySQL credentials JSON file to the Docker container
-#  - name: 'gcr.io/cloud-builders/docker'
-#    args: [ 'cp', '/appkey/credentials.json', 'gcr.io/$PROJECT_ID/hitechdocomapp:/app/credentials.json' ]
+ARG JAR_FILE=target/hitechdotcomapp*.jar
 
+# Copy the MySQL credentials JSON file into the container
+# Arguments to pass MySQL credentials during build
+COPY appkey/credentials.json app/credentials.json
 
-  # Push the container image to Google Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/raghuvanshi-api']
+COPY ${JAR_FILE} app/app.jar
 
-  # Deploy container image to Cloud Run
-#  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-#    entrypoint: gcloud
-#    args:
-#     -  'run'
-#     -  'deploy'
-#     -  'hitechdocomapp'
-#     -  '--image'
-#     -  'gcr.io/$PROJECT_ID/hitechdocomapp:$COMMIT_SHA'
-#     -  '--region'
-#     -  'us-central1'
-#     - '--platform'
-#     - 'managed'
-#     - '--allow-unauthenticated'
+# Expose the port your Spring Boot app is listening on (default is usually 8080)
+EXPOSE 8080
 
-  # Step 5: Deploy to Cloud Run with the attached MySQL credentials
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:  ['run', 'deploy', 'raghuvanshi-api', '--image', 'gcr.io/$PROJECT_ID/raghuvanshi-api', '--platform', 'managed', '--region', 'us-central1','--allow-unauthenticated' ]
-
-   # images:
-   #   - 'gcr.io/$PROJECT_ID/hitechdocomapp:$COMMIT_SHA'
+#ENTRYPOINT ["java", "-Djava.security.edg=file:/dev/./urandom","-jar","/app.jar"]
+# Set the entry point to run the application
+ENTRYPOINT ["java", "-jar", "app/app.jar"]
