@@ -1,4 +1,4 @@
-FROM openjdk:19-jdk-slim
+FROM openjdk:17-jdk-slim
 
 #Information around who maintains the image
 MAINTAINER amarsh0657
