@@ -1,0 +1,22 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://13.126.114.107:3306/raghuvanshi_dbtest
+    username: root
+    password: Password123
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
+
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "https://keyclocak-amar.duckdns.org/realms/RaghubanshiGroupRealms/protocol/openid-connect/certs"
