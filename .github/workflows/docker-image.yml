@@ -28,7 +28,7 @@ jobs:
 
 
       - name: Copy JAR to Server
-        uses: appleboy/scp-action@main
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
