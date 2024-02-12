@@ -35,7 +35,7 @@ steps:
 
   # Step 5: Deploy to Cloud Run with the attached MySQL credentials
   - name: 'gcr.io/cloud-builders/gcloud'
-    args:  ['run', 'deploy', 'raghuvhanshi-api', '--image', 'gcr.io/$PROJECT_ID/raghuvhanshi-api', '--platform', 'managed', '--region', 'us-central1','--allow-unauthenticated' ]
+    args:  ['run', 'deploy', 'raghuvhanshi-api', '--image', 'gcr.io/$PROJECT_ID/raghuvhanshi-api', '--platform', 'managed', '--region', 'asia-south1','--allow-unauthenticated' ]
 
    # images:
    #   - 'gcr.io/$PROJECT_ID/hitechdocomapp:$COMMIT_SHA'
