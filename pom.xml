@@ -16,6 +16,8 @@
     <description>groups</description>
     <properties>
         <java.version>17</java.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <otelVersion>1.27.0</otelVersion>
     </properties>
     <dependencies>
         <dependency>
@@ -96,6 +98,7 @@
     <build>
         <plugins>
             <plugin>
+
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -105,6 +108,17 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <to>
+                        <image>registry-1.docker.io/amarsh0657/groups</image>
+                    </to>
                 </configuration>
             </plugin>
         </plugins>
