@@ -6,11 +6,11 @@ steps:
   
   # Step 2: Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/YOUR_PROJECT_ID/raghuvanshi-api', '.']
+    args: ['build', '-t', 'gcr.io/raghuvhanshi-group/raghuvanshi-api', '.']
   
   # Step 3: Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/YOUR_PROJECT_ID/raghuvanshi-api']
+    args: ['push', 'gcr.io/raghuvhanshi-group/raghuvanshi-api']
 
 images:
-  - 'gcr.io/YOUR_PROJECT_ID/raghuvanshi-api'
+  - 'gcr.io/raghuvhanshi-group/raghuvanshi-api'
